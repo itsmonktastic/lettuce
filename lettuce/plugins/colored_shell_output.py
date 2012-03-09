@@ -70,6 +70,8 @@ def print_step_running(step):
         for line in step.represent_hashes().splitlines():
             write_out("\033[1;30m%s\033[0m\n" % line)
 
+def height_of_wrapped_string(string, width):
+    return int(len(string) / width) + 1
 
 @after.each_step
 def print_step_ran(step):
@@ -86,13 +88,9 @@ def print_step_ran(step):
 
     prefix = '\033[A'
     width, height = terminal.get_size()
-    lines_up = len(string) / float(width)
-    if lines_up < 1:
-        lines_up = 1
-    else:
-        lines_up = int(lines_up) + 1
+    lines_up = height_of_wrapped_string(string, width)
 
-    #prefix = prefix * lines_up
+    prefix = prefix * lines_up
 
     if step.failed:
         color = "\033[0;31m"
