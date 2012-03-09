@@ -19,15 +19,8 @@ from lettuce.plugins.colored_shell_output import height_of_wrapped_string
 
 from nose.tools import eq_
 
-def test_string_less_than_width():
-    "Shouldn't wrap, should return 1"
+def test_height_of_wrapped_string():
+    "Should wrap strings longer than the given width"
     eq_(height_of_wrapped_string("foo", 4), 1)
-
-def test_string_one_more_than_width():
-    "Should wrap, should return 2"
     eq_(height_of_wrapped_string("foofo", 4), 2)
-
-def test_string_more_than_twice_the_length():
-    "Should wrap, should return 3"
     eq_(height_of_wrapped_string("foobarbaz", 4), 3)
-
